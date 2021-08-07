@@ -1,21 +1,22 @@
 <template>
   <div class="container">
-    <draggable v-model="posts" @change="updateOrder">
-      <base-card
-        v-for="post in posts"
-        :key="post.id"
-        :index="post.id"
-        :title="post.title"
-        :path="post.path"
-      >
-      </base-card>
+    <draggable v-model="posts" @change="updateOrder" item-key="id">
+      <template #item="{element}">
+        <transition-group tag="div" class="grid">
+          <base-card
+            :index="element.id"
+            :title="element.title"
+            :path="element.path"
+          />
+        </transition-group>
+      </template>
     </draggable>
   </div>
 </template>
 
 <script>
 import { API_URL } from "@/config.js";
-import { VueDraggableNext } from "vue-draggable-next";
+import draggable from "vuedraggable";
 
 import axios from "axios";
 
@@ -24,12 +25,11 @@ import BaseCard from "@/components/BaseCard.vue";
 export default {
   components: {
     BaseCard,
-    draggable: VueDraggableNext,
+    draggable,
   },
   data() {
     return {
       posts: [],
-      list: [1, 2, 3, 4, 5, 6],
     };
   },
   async mounted() {
@@ -80,7 +80,16 @@ export default {
   margin-top: 20px;
   margin-left: 10%;
   margin-right: 10%;
+  /* display: grid;
+  grid-template-columns: 1fr 1fr 1fr; */
+}
+
+.grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
+}
+
+.grid-move {
+  transition: all 0.3s;
 }
 </style>
