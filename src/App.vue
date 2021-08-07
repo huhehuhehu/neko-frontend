@@ -1,26 +1,31 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <the-header></the-header>
+  <div class="page">
+    <router-view></router-view>
+  </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TheHeader from "./components/layout/TheHeader.vue";
 
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  components: { TheHeader },
+};
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+.page {
+  margin-top: 5rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  /* margin-left: 10%;
+  margin-right: 10%; */
+}
+
+body {
+  background-image: url("https://static.vecteezy.com/system/resources/previews/002/225/671/original/cute-cat-kitten-head-cartoon-doodle-seamless-pattern-free-vector.jpg");
+  background-position: center;
+  background-size: inherit;
 }
 </style>
