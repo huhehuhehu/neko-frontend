@@ -1,10 +1,12 @@
 //import vue router
 import { createRouter, createWebHistory } from "vue-router";
 
-import HomePage from "./pages/HomePage.vue";
+import HomePage from "./pages/views/HomePage.vue";
 import FileCreate from "./pages/forms/FileCreate.vue";
 import FileEdit from "./pages/forms/FileEdit.vue";
 import DetailedCard from "./pages/views/DetailedCard.vue";
+
+import SearchPage from "./pages/views/SearchPage.vue";
 
 //define a routes
 const routes = [
@@ -24,12 +26,18 @@ const routes = [
   {
     path: "/add",
     component: FileCreate,
+    meta: { auth: true },
   },
   {
     path: "/edit",
     component: FileEdit,
     name: "edit",
     props: true,
+    meta: { auth: true },
+  },
+  {
+    path: "/search",
+    component: SearchPage,
   },
   { path: "/:notFound(.*)", redirect: "/" },
   // {
@@ -44,5 +52,15 @@ const router = createRouter({
   history: createWebHistory(),
   routes, // config routes
 });
+
+// router.beforeEach(function(to, _, next) {
+//   if (to.meta.auth) {
+//     let pass = prompt("What's the code?");
+//     if (pass !== "magnetman") {
+//       next(false);
+//     }
+//   }
+//   next();
+// });
 
 export default router;

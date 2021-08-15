@@ -1,19 +1,19 @@
 <template>
-  <div class="card">
-    <div class="title-container">
-      <div id="title">
-        <router-link :to="'/post/' + index">
-          {{ title }}
-        </router-link>
+  <router-link :to="'/post/' + post.id">
+    <div class="card">
+      <div class="title-container">
+        <div id="title">
+          {{ post.title }}
+        </div>
       </div>
+      <img :src="post.path" />
     </div>
-    <img :src="path" />
-  </div>
+  </router-link>
 </template>
 
 <script>
 export default {
-  props: ["index", "title", "path"],
+  props: ["post"],
 };
 </script>
 
@@ -32,7 +32,8 @@ img {
 }
 
 .title-container {
-  height: 28pt;
+  display: flex;
+  height: 32pt;
 }
 
 a {
@@ -56,7 +57,7 @@ a {
   );
   -webkit-background-clip: text;
   color: transparent;
-  width: 100%;
+  overflow: hidden;
 }
 
 /* -webkit-column-break-inside: avoid; 

@@ -1,14 +1,27 @@
 <template>
   <div class="container">
     <div class="img-container">
-      <img :src="path" />
-      <div class="actions">
-        <router-link :to="{ name: 'edit', params: { index: id } }">
-          <button>edit</button>
-        </router-link>
-      </div>
+      <img class="mastahpis" :src="path" />
     </div>
     <div class="details-container">
+      <div class="actions">
+        <img
+          v-if="favorite"
+          class="btn"
+          src="@/assets/favorite-on.png"
+          id="favorite-button"
+        />
+        <img
+          v-else
+          class="btn"
+          src="@/assets/favorite-off.png"
+          id="favorite-button"
+          @click="toggleFav"
+        />
+        <router-link :to="{ name: 'edit', params: { index: id } }">
+          <img class="btn" src="@/assets/edit.png" id="edit-button" />
+        </router-link>
+      </div>
       <h1 id="title">{{ title }}</h1>
       <p id="desc">{{ description }}</p>
     </div>
@@ -26,9 +39,15 @@ export default {
       title: "",
       path: "",
       description: "",
+      favorite: false,
     };
   },
+  computed: {},
   methods: {
+    toggleFav() {
+      localStorage.setItem("fav", this.id);
+      this.favorite = true;
+    },
     get() {
       axios
         .get(API_URL + `/${this.id}`)
@@ -42,8 +61,9 @@ export default {
         });
     },
   },
-  mounted() {
+  created() {
     this.get(this.id);
+    if (localStorage.getItem("fav") == this.id) this.favorite = true;
   },
 };
 </script>
@@ -60,17 +80,18 @@ export default {
   background: rgba(24, 238, 174, 0.6);
 }
 
-.details-container {
-  padding: 10pt;
-  background: rgba(24, 238, 174, 0.6);
-}
-
-img {
+.mastahpis {
   width: 100%;
   /* height: auto; */
 }
 
+.details-container {
+  padding: 0pt 10pt 10pt 10pt;
+  background: rgba(24, 238, 174, 0.6);
+}
+
 #title {
+  margin: 0;
   font-size: 24pt;
   font-family: cursive;
   font-weight: bold;
@@ -89,8 +110,23 @@ img {
 }
 
 #desc {
+  margin: 0;
   font-family: cursive;
   font-size: 18pt;
   font-weight: bold;
+  text-align: justify;
+}
+
+.actions {
+  float: right;
+}
+
+.btn {
+  height: 1.5rem;
+  width: auto;
+}
+
+.btn:hover {
+  cursor: pointer;
 }
 </style>

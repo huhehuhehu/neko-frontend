@@ -1,6 +1,6 @@
 <template>
   <div class="form-container">
-    <form @submit.prevent="store">
+    <form autocomplete="off" @submit.prevent="store">
       <label for="title">TITLE</label><br />
       <input
         type="text"
@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import axios from "axios";
-import { API_URL } from "@/config.js";
+// import axios from "axios";
+// import { API_URL } from "@/config.js";
 
 export default {
   data() {
@@ -34,26 +34,34 @@ export default {
       title: "",
       path: "",
       description: "",
-      validation: "",
     };
   },
   methods: {
     store() {
-      axios
-        .post(API_URL, {
-          title: this.title,
-          path: this.path,
-          description: this.description,
-        })
-        .then(() => {
-          this.title = "";
-          this.path = "";
-          this.description = "";
-        })
-        .catch((error) => {
-          //assign state validation with error
-          this.validation = error.response.data;
-        });
+      // axios
+      //   .post(API_URL, {
+      //     title: this.title,
+      //     path: this.path,
+      //     description: this.description,
+      //   })
+      //   .then(() => {
+      //     this.title = "";
+      //     this.path = "";
+      //     this.description = "";
+      //   })
+      //   .catch((error) => {
+      //     //assign state validation with error
+      //     this.validation = error.response.data;
+      //   });
+
+      this.$store.dispatch("posts/addPost", {
+        title: this.title,
+        path: this.path,
+        description: this.description,
+      });
+      this.title = "";
+      this.path = "";
+      this.description = "";
     },
   },
 };

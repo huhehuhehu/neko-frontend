@@ -1,6 +1,6 @@
 <template>
   <div class="form-container">
-    <form @submit.prevent="update">
+    <form autocomplete="off" @submit.prevent="update">
       <label for="title">TITLE</label><br />
       <input
         type="text"
