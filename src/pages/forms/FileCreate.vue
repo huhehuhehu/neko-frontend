@@ -54,14 +54,20 @@ export default {
       //     this.validation = error.response.data;
       //   });
 
-      this.$store.dispatch("posts/addPost", {
-        title: this.title,
-        path: this.path,
-        description: this.description,
-      });
-      this.title = "";
-      this.path = "";
-      this.description = "";
+      this.$store
+        .dispatch("posts/addPost", {
+          title: this.title,
+          path: this.path,
+          description: this.description,
+        })
+        .then(() => {
+          this.title = "";
+          this.path = "";
+          this.description = "";
+        })
+        .catch((err) => {
+          console.log(err.message);
+        });
     },
   },
 };

@@ -41,26 +41,29 @@ export default {
   },
   data() {
     return {
-      posts: [],
       reordering: false,
-      fav: null,
     };
   },
-  async created() {
-    //get API from Laravel Backend
+  computed: {
+    posts() {
+      return this.$store.getters["posts/posts"];
+    },
+    fav() {
+      return this.$store.getters["posts/getById"](localStorage.getItem("fav"));
+    },
+  },
+  created() {
     // try {
     //   const response = await axios.get(API_URL);
     //   this.posts = response.data.data;
     // } catch (error) {
     //   console.log(error.response.data);
     // }
-    this.posts = this.$store.getters["posts/posts"].length
-      ? this.$store.getters["posts/posts"]
-      : JSON.parse(sessionStorage.getItem("posts"));
-    this.fav = this.posts.find((x) => x.id == localStorage.getItem("fav"));
-
-    sessionStorage.setItem("posts", JSON.stringify(this.posts));
-
+    // this.posts = this.$store.getters["posts/posts"].length
+    //   ? this.$store.getters["posts/posts"]
+    //   : JSON.parse(sessionStorage.getItem("posts"));
+    // this.fav = this.posts.find((x) => x.id == localStorage.getItem("fav"));
+    // sessionStorage.setItem("posts", JSON.stringify(this.posts));
     // console.log(JSON.parse(sessionStorage.getItem("posts")));
     // console.log(this.$store.getters["posts/posts"]);
     // console.log(this.posts);

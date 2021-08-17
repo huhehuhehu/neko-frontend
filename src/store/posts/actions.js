@@ -1,9 +1,11 @@
 import axios from "axios";
 import { API_URL } from "@/config.js";
 
+import router from "@/router.js";
+
 export default {
-  addPost(context, payload) {
-    axios
+  async addPost(context, payload) {
+    await axios
       .post(API_URL, {
         title: payload.title,
         path: payload.path,
@@ -11,16 +13,15 @@ export default {
       })
       .then(() => {
         context.dispatch("loadPosts");
-      })
-      .catch((error) => {
-        throw error;
       });
   },
-  async loadPosts(context) {
-    const response = await axios.get(API_URL);
-    context.commit("setPosts", response.data.data);
+  loadPosts(context) {
+    axios
+      .get(API_URL)
+      .then((response) => context.commit("setPosts", response.data.data));
   },
   editPost(context, payload) {
+    const id = payload.id;
     axios
       .put(API_URL + `/${payload.id}`, {
         title: payload.title,
@@ -28,12 +29,9 @@ export default {
         description: payload.description,
       })
       .then(() => {
-        context.dispatch("loadPosts");
-        return;
-      })
-      .catch((error) => {
-        //assign state validation with error
-        throw error;
+        context.dispatch("loadPosts").then(() => {
+          router.push(`/post/${id}`);
+        });
       });
   },
 };

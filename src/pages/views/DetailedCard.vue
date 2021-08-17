@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
+  <div class="container" v-if="post">
     <div class="img-container">
-      <img class="mastahpis" :src="path" />
+      <img class="mastahpis" :src="post.path" />
     </div>
     <div class="details-container">
       <div class="actions">
@@ -22,47 +22,52 @@
           <img class="btn" src="@/assets/edit.png" id="edit-button" />
         </router-link>
       </div>
-      <h1 id="title">{{ title }}</h1>
-      <p id="desc">{{ description }}</p>
+      <h1 id="title">{{ post.title }}</h1>
+      <p id="desc">{{ post.description }}</p>
     </div>
   </div>
 </template>
 
 <script>
-import axios from "axios";
-import { API_URL } from "@/config.js";
+// import axios from "axios";
+// import { API_URL } from "@/config.js";
 
 export default {
   props: ["id"],
   data() {
     return {
-      title: "",
-      path: "",
-      description: "",
+      // title: "",
+      // path: "",
+      // description: "",
       favorite: false,
     };
   },
-  computed: {},
+  computed: {
+    post() {
+      return this.$store.getters["posts/getById"](this.id);
+    },
+  },
   methods: {
     toggleFav() {
       localStorage.setItem("fav", this.id);
       this.favorite = true;
     },
-    get() {
-      axios
-        .get(API_URL + `/${this.id}`)
-        .then((response) => {
-          this.title = response.data.data.title;
-          this.path = response.data.data.path;
-          this.description = response.data.data.description;
-        })
-        .catch((error) => {
-          console.log(error.response.data);
-        });
-    },
+    // get() {
+    //   axios
+    //     .get(API_URL + `/${this.id}`)
+    //     .then((response) => {
+    //       this.title = response.data.data.title;
+    //       this.path = response.data.data.path;
+    //       this.description = response.data.data.description;
+    //     })
+    //     .catch((error) => {
+    //       console.log(error.response.data);
+    //     });
+    // },
   },
   created() {
-    this.get(this.id);
+    // this.get(this.id);
+    //check if this is the fav
     if (localStorage.getItem("fav") == this.id) this.favorite = true;
   },
 };

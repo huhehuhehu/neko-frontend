@@ -25,51 +25,62 @@
 </template>
 
 <script>
-import axios from "axios";
-import { API_URL } from "@/config.js";
+// import axios from "axios";
+// import { API_URL } from "@/config.js";
 
 export default {
+  props: ["id"],
   data() {
     return {
-      id: "",
       title: "",
       path: "",
       description: "",
-      validation: "",
     };
   },
   methods: {
     get() {
-      axios
-        .get(API_URL + `/${this.id}`)
-        .then((response) => {
-          //assign state posts with response data
-          this.title = response.data.data.title;
-          this.path = response.data.data.path;
-          this.description = response.data.data.description;
-        })
-        .catch((error) => {
-          console.log(error.response.data);
-        });
+      // axios
+      //   .get(API_URL + `/${this.id}`)
+      //   .then((response) => {
+      //     //assign state posts with response data
+      //     this.title = response.data.data.title;
+      //     this.path = response.data.data.path;
+      //     this.description = response.data.data.description;
+      //   })
+      //   .catch((error) => {
+      //     console.log(error.response.data);
+      //   });
+      const post = this.$store.getters["posts/getById"](this.id);
+      this.title = post.title;
+      this.path = post.path;
+      this.description = post.description;
     },
     update() {
-      axios
-        .put(API_URL + `/${this.id}`, {
+      // axios
+      //   .put(API_URL + `/${this.id}`, {
+      //     title: this.title,
+      //     path: this.path,
+      //     description: this.description,
+      //   })
+      //   .then(() => {
+      //     this.$router.push(`/post/${this.id}`);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
+      this.$store
+        .dispatch("posts/editPost", {
+          id: this.id,
           title: this.title,
           path: this.path,
           description: this.description,
         })
-        .then(() => {
-          this.$router.push(`/post/${this.id}`);
-        })
-        .catch((error) => {
-          //assign state validation with error
-          this.validation = error.response.data;
+        .catch((err) => {
+          console.log(err.message);
         });
     },
   },
-  mounted() {
-    this.id = this.$route.params.index;
+  created() {
     this.get();
   },
 };
@@ -78,6 +89,8 @@ export default {
 <style scoped>
 .form-container {
   width: 95%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #title,

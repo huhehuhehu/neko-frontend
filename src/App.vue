@@ -11,7 +11,16 @@ import TheHeader from "./components/layout/TheHeader.vue";
 export default {
   components: { TheHeader },
   created() {
-    this.$store.dispatch("posts/loadPosts");
+    this.loadPosts();
+  },
+  methods: {
+    async loadPosts() {
+      try {
+        await this.$store.dispatch("posts/loadPosts");
+      } catch (error) {
+        console.error(error);
+      }
+    },
   },
 };
 </script>

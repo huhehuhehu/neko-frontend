@@ -26,14 +26,12 @@ const routes = [
   {
     path: "/add",
     component: FileCreate,
-    meta: { auth: true },
   },
   {
-    path: "/edit",
+    path: "/edit/:id",
     component: FileEdit,
     name: "edit",
     props: true,
-    meta: { auth: true },
   },
   {
     path: "/search",
