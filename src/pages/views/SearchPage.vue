@@ -14,7 +14,7 @@ import { API_URL } from "@/config.js";
 
 import axios from "axios";
 
-import BaseCard from "@/components/cards/BaseCard.vue";
+import BaseCard from "@/components/layout/cards/BaseCard.vue";
 
 export default {
   components: {
@@ -26,14 +26,13 @@ export default {
       searchTerm: "",
     };
   },
-  async mounted() {
+  created() {
     //get API from Laravel Backend
-    try {
-      const response = await axios.get(API_URL);
-      this.posts = response.data.data;
-    } catch (error) {
-      console.log(error.response.data);
-    }
+    axios
+      .get(API_URL)
+      .then((response) => (this.posts = response.data.data))
+      .catch((error) => console.log(error.response.data));
+
     // console.log(this.posts);
   },
   methods: {

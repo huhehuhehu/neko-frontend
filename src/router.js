@@ -5,6 +5,9 @@ import HomePage from "./pages/views/HomePage.vue";
 import FileCreate from "./pages/forms/FileCreate.vue";
 import FileEdit from "./pages/forms/FileEdit.vue";
 import DetailedCard from "./pages/views/DetailedCard.vue";
+import OrderChange from "./pages/views/OrderChange.vue";
+import ScrollLoad from "./pages/views/ScrollLoad.vue";
+import PaginationPage from "./pages/views/PaginationPage.vue";
 
 import SearchPage from "./pages/views/SearchPage.vue";
 
@@ -17,6 +20,18 @@ const routes = [
   {
     path: "/home",
     component: HomePage,
+  },
+  {
+    path: "/reorder",
+    component: OrderChange,
+  },
+  {
+    path: "/scroll",
+    component: ScrollLoad,
+  },
+  {
+    path: "/paged",
+    component: PaginationPage,
   },
   {
     path: "/post/:id",

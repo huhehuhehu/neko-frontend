@@ -5,21 +5,12 @@
     </div>
     <div class="details-container">
       <div class="actions">
-        <img
-          v-if="favorite"
-          class="btn"
-          src="@/assets/favorite-on.png"
-          id="favorite-button"
-        />
-        <img
-          v-else
-          class="btn"
-          src="@/assets/favorite-off.png"
-          id="favorite-button"
-          @click="toggleFav"
-        />
+        <span :class="{ 'is-fav': favorite }" @click="toggleFav">
+          <i class="fa fa-star fa-fw"></i>
+        </span>
         <router-link :to="{ name: 'edit', params: { index: id } }">
-          <img class="btn" src="@/assets/edit.png" id="edit-button" />
+          <i class="fa fa-pencil-square-o fa-fw"></i>
+          <!-- <img class="btn" src="@/assets/edit.png" id="edit-button" /> -->
         </router-link>
       </div>
       <h1 id="title">{{ post.title }}</h1>
@@ -36,9 +27,6 @@ export default {
   props: ["id"],
   data() {
     return {
-      // title: "",
-      // path: "",
-      // description: "",
       favorite: false,
     };
   },
@@ -66,8 +54,7 @@ export default {
     // },
   },
   created() {
-    // this.get(this.id);
-    //check if this is the fav
+    //check if this is the favorite one
     if (localStorage.getItem("fav") == this.id) this.favorite = true;
   },
 };
@@ -124,14 +111,26 @@ export default {
 
 .actions {
   float: right;
+  font-size: 20pt;
+  color: beige;
 }
 
-.btn {
-  height: 1.5rem;
-  width: auto;
-}
-
-.btn:hover {
+.actions:hover {
   cursor: pointer;
+}
+
+.is-fav .fa-star {
+  color: yellow;
+}
+
+a,
+a:visited,
+a:hover,
+a:active {
+  color: inherit;
+}
+
+p {
+  white-space: pre-wrap;
 }
 </style>
