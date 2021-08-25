@@ -71,6 +71,7 @@ export default {
 
 <style scoped>
 .sidebar {
+  z-index: 999;
   position: fixed;
   left: 0;
   height: 100%;
@@ -94,6 +95,7 @@ export default {
 
 .backdrop {
   position: fixed;
+  z-index: 500;
   width: 100%;
   height: 100%;
   top: 0;
