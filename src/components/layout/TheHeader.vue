@@ -1,23 +1,32 @@
 <template>
-  <header>
+  <header :class="{ 'bg-light': !darkMode, 'bg-dark': darkMode }">
     <div class="left-header">
-      <span class="btn" @click="toggleSidebar">
+      <span class="btn f-pink" @click="toggleSidebar">
         <i class="fa fa-bars fa-fw" id="btn"></i>
       </span>
       <router-link to="/">
-        <img id="logo" src="@/assets/logo-l.png" />
+        <img v-if="!darkMode" id="logo" src="@/assets/logo-l.png" />
+        <img v-else id="logo" src="@/assets/logo-d.png" />
       </router-link>
     </div>
     <span @click="randomPost()">
       <img id="avatar" src="@/assets/yawn.png" />
     </span>
+    <div class="dark-toggle" @click="toggleDarkMode">
+      <i v-if="!darkMode" class="fa fa-sun-o fa-fw" id="sun"></i>
+      <i v-else class="fa fa-moon-o fa-fw" id="moon"></i>
+    </div>
   </header>
 </template>
 
 <script>
 export default {
-  emits: ["toggleSidebar"],
+  emits: ["toggleSidebar", "toggleDarkMode"],
+  props: ["darkMode"],
   methods: {
+    toggleDarkMode() {
+      this.$emit("toggleDarkMode");
+    },
     toggleSidebar() {
       this.$emit("toggleSidebar");
     },
@@ -37,15 +46,7 @@ header {
   width: 100%;
   height: 75px;
   left: 0;
-  /* right: 0; */
   overflow: hidden;
-
-  background: rgb(5, 142, 170);
-  background: linear-gradient(
-    30deg,
-    rgba(5, 142, 170, 1) 0%,
-    rgba(35, 221, 172, 1) 100%
-  );
 }
 
 .left-header {
@@ -61,8 +62,23 @@ header {
   max-height: 75px;
 }
 
+.dark-toggle {
+  float: right;
+  transform: translateY(35%);
+  font-size: 24pt;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.dark-toggle #sun {
+  color: yellow;
+}
+
+.dark-toggle #moon {
+  color: white;
+}
+
 #avatar {
-  /* right: 0; */
   float: right;
   cursor: pointer;
   padding-right: 15pt;
@@ -71,13 +87,13 @@ header {
 
 #btn {
   float: left;
-  color: pink;
   font-size: 16pt;
   padding-left: 10px;
   transform: translateY(125%);
+  cursor: pointer;
 }
 
-#btn:hover {
-  cursor: pointer;
+.f-pink {
+  color: pink;
 }
 </style>

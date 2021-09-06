@@ -3,8 +3,8 @@
     :class="{ backdrop: true, active: isActive }"
     @click="toggleSidebar"
   ></div>
-  <div class="minibar">
-    <ul class="nav-list">
+  <div class="minibar" :class="{ 'bg-light': !darkMode, 'bg-dark': darkMode }">
+    <ul class="nav-list f-pink">
       <router-link to="/">
         <li>
           <i class="fa fa-home fa-fw"></i>
@@ -43,12 +43,16 @@
       </router-link>
     </ul>
   </div>
-  <div :class="{ sidebar: true, active: isActive }">
-    <span class="btn" @click="toggleSidebar">
+  <div
+    class="sidebar"
+    :class="{ active: isActive, 'bg-light': !darkMode, 'bg-dark': darkMode }"
+  >
+    <span class="btn f-pink" @click="toggleSidebar">
       <i class="fa fa-bars fa-fw" id="btn"></i>
     </span>
-    <img id="logo" src="@/assets/logo-l.png" />
-    <ul class="nav-list">
+    <img v-if="!darkMode" id="logo" src="@/assets/logo-l.png" />
+    <img v-else id="logo" src="@/assets/logo-d.png" />
+    <ul class="nav-list f-pink">
       <router-link to="/">
         <li>
           <i class="fa fa-home fa-fw"></i>
@@ -91,6 +95,7 @@
 
 <script>
 export default {
+  props: ["darkMode"],
   data() {
     return {
       isActive: false,
@@ -112,13 +117,6 @@ export default {
   height: 100%;
   width: 50px;
   padding-left: 0px;
-  /* padding-top: 20px; */
-  background: rgb(5, 142, 170);
-  background: linear-gradient(
-    160deg,
-    rgba(5, 142, 170, 1) 0%,
-    rgba(35, 221, 172, 1) 100%
-  );
 }
 
 .backdrop {
@@ -140,7 +138,6 @@ export default {
 ul {
   list-style: none;
   padding-left: 0;
-  /* padding-top: 30px; */
   overflow: hidden;
 }
 
@@ -148,12 +145,10 @@ li {
   display: grid;
   grid-template-columns: 1fr 3fr;
   align-items: center;
-  /* position: relative; */
   height: 100px;
   width: 100%;
   padding-left: 10px;
   font-size: 16pt;
-  color: pink;
   transition: all 500ms ease;
 }
 
@@ -169,33 +164,23 @@ a:active {
 li:hover {
   background: rgb(55, 99, 156);
   color: white;
-  /* font-size: 24pt; */
 }
 
 .link-name {
   text-align: right;
   padding-right: 20px;
   color: inherit;
-  transition: all 300ms ease;
 }
 
 .sidebar {
   z-index: 999;
-  position: absolute;
+  position: fixed;
   left: 0;
   top: 0;
   padding-left: 0px;
   height: 100%;
   width: 200px;
-  /* padding-top: 20px; */
-  transition: all 500ms ease-in;
-  background: rgb(5, 142, 170);
-  background: linear-gradient(
-    160deg,
-    rgba(5, 142, 170, 1) 0%,
-    rgba(35, 221, 172, 1) 100%
-  );
-  /* visibility: hidden; */
+  transition: transform 500ms ease-out;
   transform: translateX(-100%);
 }
 
@@ -206,12 +191,8 @@ li:hover {
 #btn {
   padding-left: 10px;
   transform: translateY(35%);
-  color: pink;
   font-size: 16pt;
   height: 75px;
-}
-
-#btn:hover {
   cursor: pointer;
 }
 
@@ -247,5 +228,9 @@ li:hover {
 
 li:hover .tooltip {
   visibility: visible;
+}
+
+.f-pink {
+  color: pink;
 }
 </style>
