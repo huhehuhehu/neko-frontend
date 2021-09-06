@@ -10,7 +10,6 @@
         </span>
         <router-link :to="{ name: 'edit', params: { index: id } }">
           <i class="fa fa-pencil-square-o fa-fw"></i>
-          <!-- <img class="btn" src="@/assets/edit.png" id="edit-button" /> -->
         </router-link>
       </div>
       <h1 id="title">{{ post.title }}</h1>
@@ -20,9 +19,6 @@
 </template>
 
 <script>
-// import axios from "axios";
-// import { API_URL } from "@/config.js";
-
 export default {
   props: ["id"],
   data() {

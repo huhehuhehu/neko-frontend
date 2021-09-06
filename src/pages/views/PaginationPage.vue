@@ -42,6 +42,7 @@ export default {
       page: 1,
       maxPage: 1,
       loading: true,
+      pageNavLength: 5,
     };
   },
   components: {
@@ -49,10 +50,18 @@ export default {
   },
   computed: {
     pageNav() {
-      if (this.page <= 2) return Array.from({ length: 5 }, (v, k) => k + 1);
+      if (this.page <= 2)
+        return Array.from({ length: this.pageNavLength }, (v, k) => k + 1);
       else if (this.page >= this.maxPage - 2)
-        return Array.from({ length: 5 }, (v, k) => k + this.maxPage - 4);
-      else return Array.from({ length: 5 }, (v, k) => k + this.page - 2);
+        return Array.from(
+          { length: this.pageNavLength },
+          (v, k) => k + this.maxPage - (this.maxPage < 5 ? this.maxPage - 1 : 4)
+        );
+      else
+        return Array.from(
+          { length: this.pageNavLength },
+          (v, k) => k + this.page - 2
+        );
     },
   },
   watch: {
@@ -87,6 +96,7 @@ export default {
       .get(API_URL + "/length")
       .then((response) => {
         this.maxPage = Math.ceil(response.data.data / 4);
+        if (this.maxPage < 5) this.pageNavLength = this.maxPage;
         this.loading = false;
         if (this.$route.query.page) this.page = this.$route.query.page;
         else this.$router.push({ query: { page: this.page } });

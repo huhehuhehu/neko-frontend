@@ -1,6 +1,6 @@
 <template>
-  <the-header></the-header>
-  <side-bar></side-bar>
+  <the-header @toggle-sidebar="toggleSidebar"></the-header>
+  <side-bar ref="sidebar"></side-bar>
   <div class="page">
     <router-view v-slot="{ Component, route }">
       <transition name="fade" mode="out-in">
@@ -23,6 +23,9 @@ export default {
     this.loadPosts();
   },
   methods: {
+    toggleSidebar() {
+      this.$refs.sidebar.toggleSidebar();
+    },
     async loadPosts() {
       try {
         await this.$store.dispatch("posts/loadPosts");
@@ -36,7 +39,7 @@ export default {
 
 <style>
 .page {
-  margin-top: 5rem;
+  margin-top: 75px;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -45,6 +48,7 @@ export default {
 }
 
 body {
+  font-family: "Papyrus", fantasy;
   background-image: url("https://static.vecteezy.com/system/resources/previews/002/225/671/original/cute-cat-kitten-head-cartoon-doodle-seamless-pattern-free-vector.jpg");
   background-position: left top;
   background-size: inherit;

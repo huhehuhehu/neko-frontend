@@ -53,7 +53,6 @@ export default {
 }
 
 #favorite-text {
-  font-family: "Papyrus", fantasy;
   font-size: 24pt;
   font-weight: bold;
 }

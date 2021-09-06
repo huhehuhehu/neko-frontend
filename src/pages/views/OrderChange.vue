@@ -37,11 +37,9 @@ export default {
   },
   methods: {
     async updateDB(item, newIndex) {
-      // console.log(newIndex);
       await axios.put(API_URL + `/reorder/${item.id}`, {
         order: newIndex,
       });
-      // console.log(response);
     },
     reorder(start, finish, change = 1) {
       const sub = this.posts.slice(start, finish);
@@ -53,9 +51,6 @@ export default {
     updateOrder(event) {
       const oldIndex = event.moved.oldIndex;
       const newIndex = event.moved.newIndex;
-
-      // console.log(oldIndex, newIndex);
-      // console.log(this.posts);
 
       this.updateDB(this.posts[newIndex], newIndex + 1);
       this.posts[newIndex].order = newIndex + 1;
@@ -83,8 +78,6 @@ export default {
   margin-top: 20px;
   margin-left: 10%;
   margin-right: 10%;
-  /* display: grid;
-  grid-template-columns: 1fr 1fr 1fr; */
 }
 
 .movable {

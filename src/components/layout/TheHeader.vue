@@ -1,19 +1,26 @@
 <template>
   <header>
-    <router-link to="/">
-      <h1 id="title">
-        House of cats
-      </h1></router-link
-    >
-    <span @click="randomPost()"
-      ><img id="avatar" src="@/assets/yawn.png"
-    /></span>
+    <div class="left-header">
+      <span class="btn" @click="toggleSidebar">
+        <i class="fa fa-bars fa-fw" id="btn"></i>
+      </span>
+      <router-link to="/">
+        <img id="logo" src="@/assets/logo-l.png" />
+      </router-link>
+    </div>
+    <span @click="randomPost()">
+      <img id="avatar" src="@/assets/yawn.png" />
+    </span>
   </header>
 </template>
 
 <script>
 export default {
+  emits: ["toggleSidebar"],
   methods: {
+    toggleSidebar() {
+      this.$emit("toggleSidebar");
+    },
     randomPost() {
       const id = Math.ceil(Math.random() * this.$store.getters["posts/total"]);
       this.$router.push(`/post/${id}`);
@@ -28,7 +35,7 @@ header {
   position: fixed;
   top: 0;
   width: 100%;
-  height: 5rem;
+  height: 75px;
   left: 0;
   /* right: 0; */
   overflow: hidden;
@@ -41,12 +48,17 @@ header {
   );
 }
 
-header h1 {
-  color: pink;
-  font-family: "Papyrus", fantasy;
-  font-size: 24pt;
+.left-header {
   float: left;
-  padding-left: 15pt;
+  left: 0;
+  width: 200px;
+}
+
+#logo {
+  float: right;
+  cursor: pointer;
+  padding-right: 15pt;
+  max-height: 75px;
 }
 
 #avatar {
@@ -55,5 +67,17 @@ header h1 {
   cursor: pointer;
   padding-right: 15pt;
   max-height: 100%;
+}
+
+#btn {
+  float: left;
+  color: pink;
+  font-size: 16pt;
+  padding-left: 10px;
+  transform: translateY(125%);
+}
+
+#btn:hover {
+  cursor: pointer;
 }
 </style>
