@@ -7,7 +7,7 @@
       </div>
       <base-card :post="fav" />
     </div>
-    <div class="grid">
+    <div class="grid-3">
       <base-card v-for="post in posts" :key="post.id" :post="post" />
     </div>
   </div>
@@ -39,7 +39,7 @@ export default {
   min-width: 750px;
 }
 
-.grid {
+.grid-3 {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
 }

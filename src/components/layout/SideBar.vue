@@ -4,7 +4,7 @@
     @click="toggleSidebar"
   ></div>
   <div class="minibar" :class="{ 'bg-light': !darkMode, 'bg-dark': darkMode }">
-    <ul class="nav-list f-pink">
+    <ul class="nav-list" :class="{ 'f-black': !darkMode, 'f-white': darkMode }">
       <router-link to="/">
         <li>
           <i class="fa fa-home fa-fw"></i>
@@ -47,12 +47,12 @@
     class="sidebar"
     :class="{ active: isActive, 'bg-light': !darkMode, 'bg-dark': darkMode }"
   >
-    <span class="btn f-pink" @click="toggleSidebar">
+    <span class="btn" @click="toggleSidebar">
       <i class="fa fa-bars fa-fw" id="btn"></i>
     </span>
     <img v-if="!darkMode" id="logo" src="@/assets/logo-l.png" />
     <img v-else id="logo" src="@/assets/logo-d.png" />
-    <ul class="nav-list f-pink">
+    <ul class="nav-list">
       <router-link to="/">
         <li>
           <i class="fa fa-home fa-fw"></i>
@@ -162,7 +162,7 @@ a:active {
 }
 
 li:hover {
-  background: rgb(55, 99, 156);
+  background: rgb(131, 131, 131);
   color: white;
 }
 
@@ -186,6 +186,16 @@ li:hover {
 
 .sidebar.active {
   transform: translateX(0);
+}
+
+@media screen and (max-width: 750px) {
+  .sidebar.active {
+    transform: translateX(-100%);
+  }
+
+  .backdrop.active {
+    visibility: hidden;
+  }
 }
 
 #btn {
@@ -228,9 +238,5 @@ li:hover {
 
 li:hover .tooltip {
   visibility: visible;
-}
-
-.f-pink {
-  color: pink;
 }
 </style>

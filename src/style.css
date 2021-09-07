@@ -1,0 +1,39 @@
+body {
+  font-family: "Papyrus", fantasy;
+  background-image: url("./assets/bg-light.png");
+  background-position: left top;
+  background-size: inherit;
+  background-repeat: repeat;
+  color: black;
+}
+
+body.bg-dark {
+  background-image: url("./assets/bg-dark.png");
+  color: white;
+}
+
+.bg-light {
+  /* background: rgb(5, 142, 170);
+  background: linear-gradient(
+    160deg,
+    rgba(5, 142, 170, 1) 0%,
+    rgba(35, 221, 172, 1) 100%
+  ); */
+  background: rgb(228, 228, 228);
+}
+
+.bg-dark {
+  background: rgb(70, 70, 70);
+}
+
+.f-pink {
+  color: pink;
+}
+
+.f-white {
+  color: white;
+}
+
+.f-black {
+  color: black;
+}

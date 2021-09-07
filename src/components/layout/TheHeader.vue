@@ -1,7 +1,7 @@
 <template>
   <header :class="{ 'bg-light': !darkMode, 'bg-dark': darkMode }">
     <div class="left-header">
-      <span class="btn f-pink" @click="toggleSidebar">
+      <span class="btn" @click="toggleSidebar">
         <i class="fa fa-bars fa-fw" id="btn"></i>
       </span>
       <router-link to="/">
@@ -91,9 +91,5 @@ header {
   padding-left: 10px;
   transform: translateY(125%);
   cursor: pointer;
-}
-
-.f-pink {
-  color: pink;
 }
 </style>

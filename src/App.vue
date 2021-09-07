@@ -31,6 +31,8 @@ export default {
   created() {
     this.loadPosts();
     this.darkMode = localStorage.getItem("darkmode") || false;
+    if (!this.darkMode) document.body.classList.remove("bg-dark");
+    else document.body.classList.add("bg-dark");
   },
   methods: {
     toggleSidebar() {
@@ -39,6 +41,7 @@ export default {
     toggleDarkMode() {
       this.darkMode = !this.darkMode;
       localStorage.setItem("darkmode", this.darkMode);
+      document.body.classList.toggle("bg-dark");
     },
     async loadPosts() {
       try {
@@ -57,27 +60,6 @@ export default {
   display: flex;
   justify-content: center;
   flex-direction: column;
-}
-
-body {
-  font-family: "Papyrus", fantasy;
-  background-image: url("https://static.vecteezy.com/system/resources/previews/002/225/671/original/cute-cat-kitten-head-cartoon-doodle-seamless-pattern-free-vector.jpg");
-  background-position: left top;
-  background-size: inherit;
-  background-repeat: repeat;
-}
-
-.bg-light {
-  background: rgb(5, 142, 170);
-  background: linear-gradient(
-    160deg,
-    rgba(5, 142, 170, 1) 0%,
-    rgba(35, 221, 172, 1) 100%
-  );
-}
-
-.bg-dark {
-  background: rgb(70, 70, 70);
 }
 
 .fade-enter-active,
