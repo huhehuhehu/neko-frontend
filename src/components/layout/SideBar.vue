@@ -222,7 +222,7 @@ li:hover {
   position: absolute;
   text-align: center;
   padding-top: 10px;
-  transform: translateY(25px);
+  transform: translateY(30px);
   left: 50px;
   border-radius: 10px;
   height: 35px;

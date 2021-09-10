@@ -31,8 +31,8 @@ export default {
   created() {
     this.loadPosts();
     this.darkMode = localStorage.getItem("darkmode") || false;
-    if (!this.darkMode) document.body.classList.remove("bg-dark");
-    else document.body.classList.add("bg-dark");
+    if (!this.darkMode) document.body.classList.remove("dark-theme");
+    else document.body.classList.add("dark-theme");
   },
   methods: {
     toggleSidebar() {
@@ -41,7 +41,7 @@ export default {
     toggleDarkMode() {
       this.darkMode = !this.darkMode;
       localStorage.setItem("darkmode", this.darkMode);
-      document.body.classList.toggle("bg-dark");
+      document.body.classList.toggle("dark-theme");
     },
     async loadPosts() {
       try {

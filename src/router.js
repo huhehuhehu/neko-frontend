@@ -66,6 +66,10 @@ const router = createRouter({
   routes, // config routes
 });
 
+router.beforeEach(() => {
+  window.scrollTo(0, 0);
+});
+
 // router.beforeEach(function(to, _, next) {
 //   if (to.meta.auth) {
 //     let pass = prompt("What's the code?");

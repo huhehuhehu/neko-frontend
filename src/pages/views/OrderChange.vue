@@ -1,19 +1,18 @@
 <template>
   <div class="container">
-    <div class="movable">
-      <draggable
-        v-model="posts"
-        @change="updateOrder"
-        item-key="id"
-        handle=".handle"
-      >
-        <template #item="{element}">
-          <transition-group tag="div" name="columns">
-            <drag-card :key="element.id" :post="element" />
-          </transition-group>
-        </template>
-      </draggable>
-    </div>
+    <draggable
+      v-model="posts"
+      @change="updateOrder"
+      item-key="id"
+      class="grid-3"
+      handle=".handle"
+    >
+      <template #item="{element}">
+        <transition-group tag="div" name="slide">
+          <drag-card :key="element.id" :post="element" />
+        </transition-group>
+      </template>
+    </draggable>
   </div>
 </template>
 
@@ -80,12 +79,12 @@ export default {
   margin-right: 10%;
 }
 
-.movable {
-  column-count: 3;
-  column-gap: 0;
+.grid-3 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
-.columns-move {
-  transition: all 1s;
+.slide-move {
+  transition: all 1s ease-out;
 }
 </style>

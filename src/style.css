@@ -7,7 +7,7 @@ body {
   color: black;
 }
 
-body.bg-dark {
+body.dark-theme {
   background-image: url("./assets/bg-dark.png");
   color: white;
 }
