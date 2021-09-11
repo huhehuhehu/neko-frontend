@@ -91,5 +91,6 @@ header {
   padding-left: 10px;
   transform: translateY(125%);
   cursor: pointer;
+  transition: all 500ms ease;
 }
 </style>

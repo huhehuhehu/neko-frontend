@@ -62,13 +62,23 @@ export default {
   flex-direction: column;
 }
 
-.fade-enter-active,
+.fade-enter-active {
+  transition: all 0.6s linear;
+}
+
 .fade-leave-active {
-  transition: opacity 0.5s ease;
+  transition: all 0.3s ease;
+}
+
+.fade-enter-to,
+.fade-leave-from {
+  transform: translateY(0);
+  opacity: 1;
 }
 
 .fade-enter-from,
 .fade-leave-to {
+  transform: translateY(-50px);
   opacity: 0;
 }
 </style>

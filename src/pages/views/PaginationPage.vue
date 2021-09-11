@@ -4,24 +4,31 @@
       <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
     </div>
     <div v-else>
-      <!-- <div class="grid"> -->
-      <transition-group name="slide-fade" tag="div" class="grid">
+      <transition-group name="slide-fade" tag="div" class="grid" mode="out-in">
         <base-card v-for="post in posts" :key="post.id" :post="post" />
       </transition-group>
-      <!-- </div> -->
-      <div class="page-navigation">
-        <i class="fa fa-angle-double-left fa-fw" @click="firstPage"></i>
-        <i class="fa fa-angle-left fa-fw" @click="pageDown"></i>
+      <div class="page-nav-bar">
+        <div class="page-numbers" @click="firstPage">
+          <i class="fa fa-angle-double-left"></i>
+        </div>
+        <div class="page-numbers" @click="pageDown">
+          <i class="fa fa-angle-left"></i>
+        </div>
         <div
           v-for="pageNum in pageNav"
           :key="pageNum"
-          :class="{ 'page-numbers': true, active: pageNum == page }"
+          class="page-numbers"
+          :class="{ active: pageNum == page }"
           @click="goToPage(pageNum)"
         >
           {{ pageNum }}
         </div>
-        <i class="fa fa-angle-right fa-fw" @click="pageUp"></i>
-        <i class="fa fa-angle-double-right fa-fw" @click="lastPage"></i>
+        <div class="page-numbers" @click="pageUp">
+          <i class="fa fa-angle-right"></i>
+        </div>
+        <div class="page-numbers" @click="lastPage">
+          <i class="fa fa-angle-double-right"></i>
+        </div>
       </div>
     </div>
   </div>
@@ -34,6 +41,7 @@ import axios from "axios";
 import { API_URL } from "@/config.js";
 
 const FIRST_PAGE = 1;
+const MAX_NAV_LENGTH = 5;
 
 export default {
   data() {
@@ -55,7 +63,12 @@ export default {
       else if (this.page >= this.maxPage - 2)
         return Array.from(
           { length: this.pageNavLength },
-          (v, k) => k + this.maxPage - (this.maxPage < 5 ? this.maxPage - 1 : 4)
+          (v, k) =>
+            k +
+            this.maxPage -
+            (this.maxPage < MAX_NAV_LENGTH
+              ? this.maxPage - 1
+              : MAX_NAV_LENGTH - 1)
         );
       else
         return Array.from(
@@ -83,7 +96,7 @@ export default {
       this.$router.push({ query: { page: ++this.page } });
     },
     pageDown() {
-      if (this.page == 1) return;
+      if (this.page == FIRST_PAGE) return;
       this.$router.push({ query: { page: --this.page } });
     },
     goToPage(page) {
@@ -96,7 +109,7 @@ export default {
       .get(API_URL + "/length")
       .then((response) => {
         this.maxPage = Math.ceil(response.data.data / 4);
-        if (this.maxPage < 5) this.pageNavLength = this.maxPage;
+        if (this.maxPage < MAX_NAV_LENGTH) this.pageNavLength = this.maxPage;
         this.loading = false;
         if (this.$route.query.page) this.page = this.$route.query.page;
         else this.$router.push({ query: { page: this.page } });
@@ -131,7 +144,7 @@ export default {
   padding-top: 10px;
 }
 
-.page-navigation {
+.page-nav-bar {
   display: flex;
   font-size: 24pt;
   align-items: center;
@@ -144,6 +157,7 @@ export default {
 .page-numbers {
   padding-left: 10px;
   padding-right: 10px;
+  height: 100%;
 }
 
 i:hover,
@@ -154,17 +168,42 @@ i:hover,
 }
 
 .slide-fade-enter-active {
-  transition: all 1s ease-in;
+  animation: entrance 1s linear;
 }
 
-/* .slide-fade-leave-active {
-  transition: all 0.8s ease;
-} */
+.slide-fade-leave-active {
+  transition: all 0.5s linear;
+}
 
-.slide-fade-enter-from, 
-.slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
-  transform: translateX(10px);
+.slide-fade-leave-to {
+  transform: translateX(-100px);
   opacity: 0;
+}
+
+.slide-fade-leave-from {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+@keyframes entrance {
+  0% {
+    visibility: hidden;
+    position: absolute;
+    opacity: 0;
+  }
+  50% {
+    position: absolute;
+    visibility: hidden;
+  }
+  51% {
+    position: inherit;
+    visibility: visible;
+    transform: translateX(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 </style>
