@@ -4,9 +4,9 @@
       <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
     </div>
     <div v-else>
-      <transition-group name="slide-fade" tag="div" class="grid" mode="out-in">
-        <base-card v-for="post in posts" :key="post.id" :post="post" />
-      </transition-group>
+      <div class="grid-container">
+        <paged-card :posts="posts" />
+      </div>
       <div class="page-nav-bar">
         <div class="page-numbers" @click="firstPage">
           <i class="fa fa-angle-double-left"></i>
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import BaseCard from "@/components/cards/BaseCard.vue";
+import PagedCard from "@/components/cards/PagedCard.vue";
 
 import axios from "axios";
 import { API_URL } from "@/config.js";
@@ -54,7 +54,7 @@ export default {
     };
   },
   components: {
-    BaseCard,
+    PagedCard,
   },
   computed: {
     pageNav() {
@@ -128,9 +128,7 @@ export default {
   min-width: 750px;
 }
 
-.grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
+.grid-container {
 }
 
 #load-icon {
@@ -165,45 +163,5 @@ i:hover,
 .page-numbers.active {
   cursor: pointer;
   background: rgb(62, 62, 110);
-}
-
-.slide-fade-enter-active {
-  animation: entrance 1s linear;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.5s linear;
-}
-
-.slide-fade-leave-to {
-  transform: translateX(-100px);
-  opacity: 0;
-}
-
-.slide-fade-leave-from {
-  transform: translateX(0);
-  opacity: 1;
-}
-
-@keyframes entrance {
-  0% {
-    visibility: hidden;
-    position: absolute;
-    opacity: 0;
-  }
-  50% {
-    position: absolute;
-    visibility: hidden;
-  }
-  51% {
-    position: inherit;
-    visibility: visible;
-    transform: translateX(100px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
 }
 </style>
