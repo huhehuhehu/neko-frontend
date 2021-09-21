@@ -14,7 +14,7 @@ import { API_URL } from "@/config.js";
 
 import axios from "axios";
 
-import BaseCard from "@/components/layout/cards/BaseCard.vue";
+import BaseCard from "@/components/cards/BaseCard.vue";
 
 export default {
   components: {

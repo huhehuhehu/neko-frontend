@@ -35,7 +35,7 @@
 </template>
 
 <script>
-import BaseCard from "@/components/layout/cards/BaseCard.vue";
+import BaseCard from "@/components/cards/BaseCard.vue";
 
 import axios from "axios";
 import { API_URL } from "@/config.js";

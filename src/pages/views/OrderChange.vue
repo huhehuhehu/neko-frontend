@@ -22,7 +22,7 @@ import draggable from "vuedraggable";
 
 import axios from "axios";
 
-import DragCard from "@/components/layout/cards/DragCard.vue";
+import DragCard from "@/components/cards/DragCard.vue";
 
 export default {
   data() {

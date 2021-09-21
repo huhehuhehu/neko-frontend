@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import BaseCard from "@/components/layout/cards/BaseCard.vue";
+import BaseCard from "@/components/cards/BaseCard.vue";
 
 // import { POST_PER_LOAD } from "@/config.js";
 
