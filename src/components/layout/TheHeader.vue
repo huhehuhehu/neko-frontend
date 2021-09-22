@@ -1,5 +1,5 @@
 <template>
-  <header :class="{ 'bg-light': !darkMode, 'bg-dark': darkMode }">
+  <header class="bg" :class="{ 'dark-theme': darkMode }">
     <div class="left-header">
       <span class="btn" @click="toggleSidebar">
         <i class="fa fa-bars fa-fw" id="btn"></i>
@@ -13,8 +13,16 @@
       <img id="avatar" src="@/assets/yawn.png" />
     </span>
     <div class="dark-toggle" @click="toggleDarkMode">
-      <i v-if="!darkMode" class="fa fa-sun-o fa-fw" id="sun"></i>
-      <i v-else class="fa fa-moon-o fa-fw" id="moon"></i>
+      <i
+        class="fa fa-sun-o fa-fw"
+        :class="{ 'dark-theme': darkMode }"
+        id="sun"
+      ></i>
+      <i
+        class="fa fa-moon-o fa-fw"
+        :class="{ 'dark-theme': darkMode }"
+        id="moon"
+      ></i>
     </div>
   </header>
 </template>
@@ -64,18 +72,33 @@ header {
 
 .dark-toggle {
   float: right;
-  transform: translateY(35%);
+  transform: translateY(40%);
   font-size: 24pt;
   margin-right: 10px;
   cursor: pointer;
+  max-height: 30pt;
+  overflow: hidden;
 }
 
-.dark-toggle #sun {
+#sun {
+  position: absolute;
   color: yellow;
+  transform: translateY(15%);
+  transition: transform 0.5s ease-out;
 }
 
-.dark-toggle #moon {
+.dark-theme #sun {
+  transform: translateY(-150%);
+}
+
+#moon {
   color: white;
+  transform: translateY(150%);
+  transition: transform 0.5s ease-out;
+}
+
+.dark-theme #moon {
+  transform: translateY(0);
 }
 
 #avatar {
@@ -91,6 +114,5 @@ header {
   padding-left: 10px;
   transform: translateY(125%);
   cursor: pointer;
-  transition: all 500ms ease;
 }
 </style>
