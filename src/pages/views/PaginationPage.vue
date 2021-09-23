@@ -128,9 +128,6 @@ export default {
   min-width: 750px;
 }
 
-.grid-container {
-}
-
 #load-icon {
   border: 1pt solid rgb(0, 53, 90);
   padding: 0 10px 10px 10px;

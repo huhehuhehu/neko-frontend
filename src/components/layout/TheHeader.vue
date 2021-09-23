@@ -1,27 +1,30 @@
 <template>
   <header class="bg" :class="{ 'dark-theme': darkMode }">
-    <div class="left-header">
-      <span class="btn" @click="toggleSidebar">
-        <i class="fa fa-bars fa-fw" id="btn"></i>
+    <div class="header-left">
+      <span @click="toggleSidebar">
+        <i class="fa fa-bars fa-fw" id="sidebar-toggle"></i>
       </span>
       <router-link to="/">
         <img id="logo" :src="require(`@/assets/logo-${logoExtension}.png`)" />
       </router-link>
     </div>
-    <span @click="randomPost()">
-      <img id="avatar" src="@/assets/yawn.png" />
-    </span>
-    <div class="dark-toggle" @click="toggleDarkMode">
-      <i
-        class="fa fa-sun-o fa-fw"
-        :class="{ 'dark-theme': darkMode }"
-        id="sun"
-      ></i>
-      <i
-        class="fa fa-moon-o fa-fw"
-        :class="{ 'dark-theme': darkMode }"
-        id="moon"
-      ></i>
+    <div class="header-right">
+      <div class="dark-toggle" @click="toggleDarkMode">
+        <i
+          class="fa fa-sun-o fa-fw"
+          :class="{ 'dark-theme': darkMode }"
+          id="sun"
+        ></i>
+        <i
+          class="fa fa-moon-o fa-fw"
+          :class="{ 'dark-theme': darkMode }"
+          id="moon"
+        ></i>
+      </div>
+      <div class="container-avatar" @click="randomPost()">
+        <img id="avatar" src="@/assets/yawn.png" />
+        <span class="tooltip">RANDOM MASTAHPIS</span>
+      </div>
     </div>
   </header>
 </template>
@@ -58,24 +61,42 @@ header {
   width: 100%;
   height: 75px;
   left: 0;
-  overflow: hidden;
 }
 
-.left-header {
+/* items on the left */
+
+.header-left {
   float: left;
   left: 0;
   width: 200px;
+  height: 100%;
+}
+
+#sidebar-toggle {
+  float: left;
+  font-size: 16pt;
+  padding-left: 10px;
+  transform: translateY(125%);
+  cursor: pointer;
 }
 
 #logo {
-  float: right;
   cursor: pointer;
+  float: right;
   padding-right: 15pt;
   max-height: 75px;
 }
 
-.dark-toggle {
+/* items on the right */
+
+.header-right {
   float: right;
+  height: 100%;
+  display: inline-block;
+}
+
+.dark-toggle {
+  float: left;
   transform: translateY(40%);
   font-size: 24pt;
   margin-right: 10px;
@@ -105,18 +126,36 @@ header {
   transform: translateY(0);
 }
 
-#avatar {
+.container-avatar {
   float: right;
   cursor: pointer;
-  padding-right: 15pt;
   max-height: 100%;
+  margin-right: 15px;
+  position: relative;
 }
 
-#btn {
-  float: left;
-  font-size: 16pt;
-  padding-left: 10px;
-  transform: translateY(125%);
-  cursor: pointer;
+#avatar {
+  max-height: 75px;
+}
+
+.tooltip {
+  font-size: 8pt;
+  font-weight: bold;
+  color: black;
+  position: absolute;
+  text-align: center;
+  padding-top: 10px;
+  right: 5px;
+  top: 80px;
+  height: 25px;
+  width: 180px;
+  border-radius: 10px;
+  background: #fff;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+  visibility: hidden;
+}
+
+.container-avatar:hover .tooltip {
+  visibility: visible;
 }
 </style>

@@ -44,8 +44,8 @@
     </ul>
   </div>
   <div class="sidebar bg" :class="{ active: isActive, 'dark-theme': darkMode }">
-    <span class="btn" @click="toggleSidebar">
-      <i class="fa fa-bars fa-fw" id="btn"></i>
+    <span @click="toggleSidebar">
+      <i class="fa fa-bars fa-fw" id="sidebar-toggle"></i>
     </span>
     <img id="logo" :src="require(`@/assets/logo-${logoExtension}.png`)" />
     <ul class="nav-list">
@@ -111,15 +111,7 @@ export default {
 </script>
 
 <style scoped>
-.minibar {
-  z-index: 990;
-  position: fixed;
-  left: 0;
-  height: 100%;
-  width: 50px;
-  padding-left: 0px;
-}
-
+/* backdrop */
 .backdrop {
   position: fixed;
   z-index: 500;
@@ -135,20 +127,12 @@ export default {
   visibility: visible;
 }
 
+/* common elements sidebar/minibar */
+
 ul {
   list-style: none;
   padding-left: 0;
   overflow: hidden;
-}
-
-li {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-  align-items: center;
-  height: 100px;
-  width: 100%;
-  padding-left: 10px;
-  font-size: 16pt;
 }
 
 a,
@@ -165,11 +149,27 @@ li:hover {
   color: white;
 }
 
-.link-name {
-  text-align: right;
-  padding-right: 20px;
-  color: inherit;
+/* minibar */
+
+.minibar {
+  z-index: 990;
+  position: fixed;
+  left: 0;
+  height: 100%;
+  width: 50px;
+  padding-left: 0px;
 }
+
+.minibar ul li {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  width: 100%;
+  padding-left: 10px;
+  font-size: 16pt;
+}
+
+/* sidebar */
 
 .sidebar {
   z-index: 999;
@@ -181,6 +181,16 @@ li:hover {
   width: 200px;
   transition: all 500ms ease-out;
   transform: translateX(-100%);
+}
+
+.sidebar ul li {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  align-items: center;
+  height: 100px;
+  width: 100%;
+  padding-left: 10px;
+  font-size: 16pt;
 }
 
 .sidebar.active {
@@ -197,7 +207,7 @@ li:hover {
   }
 }
 
-#btn {
+#sidebar-toggle {
   padding-left: 10px;
   transform: translateY(35%);
   font-size: 16pt;
@@ -211,9 +221,17 @@ li:hover {
   max-height: 75px;
 }
 
-.sidebar.active #btn {
+.sidebar.active #sidebar-toggle {
   left: 80%;
 }
+
+.link-name {
+  text-align: right;
+  padding-right: 20px;
+  color: inherit;
+}
+
+/* tooltip */
 
 .tooltip {
   font-size: 12pt;
@@ -221,7 +239,6 @@ li:hover {
   position: absolute;
   text-align: center;
   padding-top: 10px;
-  /* transform: translateY(30px); */
   left: 60px;
   border-radius: 10px;
   height: 35px;
