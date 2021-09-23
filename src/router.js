@@ -11,7 +11,7 @@ import PaginationPage from "./pages/views/PaginationPage.vue";
 
 import SearchPage from "./pages/views/SearchPage.vue";
 
-//define a routes
+//define routes
 const routes = [
   {
     path: "/",
@@ -45,7 +45,6 @@ const routes = [
   {
     path: "/edit/:id",
     component: FileEdit,
-    name: "edit",
     props: true,
   },
   {
@@ -53,11 +52,6 @@ const routes = [
     component: SearchPage,
   },
   { path: "/:notFound(.*)", redirect: "/" },
-  // {
-  //     path: '/create',
-  //     name: 'post.create',
-  //     component: () => import( /* webpackChunkName: "post.create" */ '@/views/post/Create.vue')
-  // },
 ];
 
 //create router
@@ -66,6 +60,7 @@ const router = createRouter({
   routes, // config routes
 });
 
+//scroll to top every route change
 router.beforeEach(() => {
   window.scrollTo(0, 0);
 });

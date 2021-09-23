@@ -8,7 +8,7 @@
         <span :class="{ 'is-fav': favorite }" @click="toggleFav">
           <i class="fa fa-star fa-fw"></i>
         </span>
-        <router-link :to="{ name: 'edit', params: { index: id } }">
+        <router-link :to="'/edit/' + id">
           <i class="fa fa-pencil-square-o fa-fw"></i>
         </router-link>
       </div>

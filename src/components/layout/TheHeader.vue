@@ -5,8 +5,7 @@
         <i class="fa fa-bars fa-fw" id="btn"></i>
       </span>
       <router-link to="/">
-        <img v-if="!darkMode" id="logo" src="@/assets/logo-l.png" />
-        <img v-else id="logo" src="@/assets/logo-d.png" />
+        <img id="logo" :src="require(`@/assets/logo-${logoExtension}.png`)" />
       </router-link>
     </div>
     <span @click="randomPost()">
@@ -31,6 +30,11 @@
 export default {
   emits: ["toggleSidebar", "toggleDarkMode"],
   props: ["darkMode"],
+  computed: {
+    logoExtension() {
+      return this.darkMode ? "d" : "l";
+    },
+  },
   methods: {
     toggleDarkMode() {
       this.$emit("toggleDarkMode");

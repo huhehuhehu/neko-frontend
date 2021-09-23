@@ -4,7 +4,7 @@
     @click="toggleSidebar"
   ></div>
   <div class="minibar bg" :class="{ 'dark-theme': darkMode }">
-    <ul class="nav-list" :class="{ 'f-black': !darkMode, 'f-white': darkMode }">
+    <ul class="nav-list">
       <router-link to="/">
         <li>
           <i class="fa fa-home fa-fw"></i>
@@ -47,8 +47,7 @@
     <span class="btn" @click="toggleSidebar">
       <i class="fa fa-bars fa-fw" id="btn"></i>
     </span>
-    <img v-if="!darkMode" id="logo" src="@/assets/logo-l.png" />
-    <img v-else id="logo" src="@/assets/logo-d.png" />
+    <img id="logo" :src="require(`@/assets/logo-${logoExtension}.png`)" />
     <ul class="nav-list">
       <router-link to="/">
         <li>
@@ -98,6 +97,11 @@ export default {
       isActive: false,
     };
   },
+  computed: {
+    logoExtension() {
+      return this.darkMode ? "d" : "l";
+    },
+  },
   methods: {
     toggleSidebar() {
       this.isActive = !this.isActive;
@@ -125,7 +129,6 @@ export default {
   left: 0;
   background: rgba(0, 0, 0, 0.5);
   visibility: hidden;
-  /* transition: all 3s ease-in; */
 }
 
 .backdrop.active {
@@ -146,7 +149,6 @@ li {
   width: 100%;
   padding-left: 10px;
   font-size: 16pt;
-  transition: all 500ms ease;
 }
 
 a,
@@ -177,7 +179,7 @@ li:hover {
   padding-left: 0px;
   height: 100%;
   width: 200px;
-  transition: transform 500ms ease-out;
+  transition: all 500ms ease-out;
   transform: translateX(-100%);
 }
 
@@ -220,7 +222,7 @@ li:hover {
   text-align: center;
   padding-top: 10px;
   /* transform: translateY(30px); */
-  left: 50px;
+  left: 60px;
   border-radius: 10px;
   height: 35px;
   width: 200px;
