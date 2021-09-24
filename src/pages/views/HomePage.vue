@@ -36,7 +36,6 @@ export default {
   margin-top: 20px;
   margin-left: 10%;
   margin-right: 10%;
-  min-width: 750px;
 }
 
 .grid-3 {

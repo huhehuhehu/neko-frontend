@@ -1,5 +1,5 @@
 <template>
-  <header class="bg" :class="{ 'dark-theme': darkMode }">
+  <header class="nav-bg">
     <div class="header-left">
       <span @click="toggleSidebar">
         <i class="fa fa-bars fa-fw" id="sidebar-toggle"></i>
@@ -10,16 +10,8 @@
     </div>
     <div class="header-right">
       <div class="dark-toggle" @click="toggleDarkMode">
-        <i
-          class="fa fa-sun-o fa-fw"
-          :class="{ 'dark-theme': darkMode }"
-          id="sun"
-        ></i>
-        <i
-          class="fa fa-moon-o fa-fw"
-          :class="{ 'dark-theme': darkMode }"
-          id="moon"
-        ></i>
+        <i class="fa fa-sun-o fa-fw" id="sun"></i>
+        <i class="fa fa-moon-o fa-fw" id="moon"></i>
       </div>
       <div class="container-avatar" @click="randomPost()">
         <img id="avatar" src="@/assets/yawn.png" />

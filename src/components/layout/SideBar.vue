@@ -3,7 +3,7 @@
     :class="{ backdrop: true, active: isActive }"
     @click="toggleSidebar"
   ></div>
-  <div class="minibar bg" :class="{ 'dark-theme': darkMode }">
+  <div class="minibar nav-bg">
     <ul class="nav-list">
       <router-link to="/">
         <li>
@@ -43,7 +43,7 @@
       </router-link>
     </ul>
   </div>
-  <div class="sidebar bg" :class="{ active: isActive, 'dark-theme': darkMode }">
+  <div class="sidebar nav-bg" :class="{ active: isActive }">
     <span @click="toggleSidebar">
       <i class="fa fa-bars fa-fw" id="sidebar-toggle"></i>
     </span>

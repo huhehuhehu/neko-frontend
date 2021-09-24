@@ -13,7 +13,7 @@ body.dark-theme {
   color: white;
 }
 
-.bg {
+.nav-bg {
   /* background: rgb(5, 142, 170);
   background: linear-gradient(
     160deg,
@@ -24,7 +24,7 @@ body.dark-theme {
   transition: background 0.5s ease-out;
 }
 
-.bg.dark-theme {
+.dark-theme .nav-bg {
   background: rgb(70, 70, 70);
 }
 

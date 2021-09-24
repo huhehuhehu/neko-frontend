@@ -60,6 +60,7 @@ export default {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  min-width: 1000px;
 }
 
 .fade-enter-active {
