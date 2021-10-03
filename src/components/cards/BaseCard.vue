@@ -34,7 +34,7 @@ export default {
 
 .img-container:hover {
   transform: scale(1.16);
-  z-index: 999;
+  z-index: 700;
 }
 
 a {
