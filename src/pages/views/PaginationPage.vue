@@ -144,7 +144,7 @@ export default {
   font-size: 24pt;
   align-items: center;
   justify-content: center;
-  background: rgba(100, 194, 231, 0.7);
+  background: rgba(80, 80, 80, 0.7);
   border: 1pt solid rgb(0, 53, 90);
   border-radius: 10px;
 }
@@ -159,6 +159,6 @@ i:hover,
 .page-numbers:hover,
 .page-numbers.active {
   cursor: pointer;
-  background: rgb(62, 62, 110);
+  background: black;
 }
 </style>

@@ -1,12 +1,13 @@
 <template>
   <router-link :to="'/post/' + post.id">
     <div class="card">
-      <div class="title-container">
-        <div id="title">
+      <div class="img-container">
+        <img :src="post.path" />
+        <div class="bg-container" />
+        <div class="title">
           {{ post.title }}
         </div>
       </div>
-      <img :src="post.path" />
     </div>
   </router-link>
 </template>
@@ -19,21 +20,21 @@ export default {
 
 <style scoped>
 .card {
-  border: 1pt solid rgb(0, 53, 90);
-  padding: 0 10px 10px 10px;
-  border-radius: 10px;
-  background: rgba(100, 194, 231, 0.7);
-  overflow: hidden;
+  position: relative;
 }
 
-img {
-  padding-top: 10px;
+.img-container {
+  position: relative;
+  line-height: 0;
   width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  transition: transform 0.9s ease-out;
 }
 
-.title-container {
-  display: flex;
-  height: 32pt;
+.img-container:hover {
+  transform: scale(1.16);
+  z-index: 999;
 }
 
 a {
@@ -41,26 +42,44 @@ a {
   color: inherit;
 }
 
-#title {
-  font-size: 24pt;
-  font-family: cursive;
-  font-weight: bold;
-  background-image: linear-gradient(
-    to left,
-    violet,
-    indigo,
-    blue,
-    green,
-    yellow,
-    orange,
-    red
-  );
-  -webkit-background-clip: text;
-  color: transparent;
-  overflow: hidden;
+img {
+  width: 100%;
 }
 
-/* -webkit-column-break-inside: avoid; 
-  page-break-inside: avoid; 
-  break-inside: avoid;  */
+/* overview */
+
+.bg-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgb(34, 34, 34);
+  background: linear-gradient(
+    0deg,
+    rgba(34, 34, 34, 0.804359243697479) 0%,
+    rgba(99, 99, 99, 0.5998774509803921) 40%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  top: 0;
+  visibility: hidden;
+}
+
+.title {
+  position: absolute;
+  left: 20px;
+  bottom: 1.5vw;
+  font-size: 1.5vw;
+  font-weight: bold;
+  white-space: nowrap;
+  visibility: hidden;
+  /* overflow: hidden;
+  text-overflow: ellipsis; */
+}
+
+.card:hover .bg-container {
+  visibility: visible;
+}
+
+.card:hover .title {
+  visibility: visible;
+}
 </style>
