@@ -44,10 +44,6 @@
     </ul>
   </div>
   <div class="sidebar nav-bg" :class="{ active: isActive }">
-    <span @click="toggleSidebar">
-      <i class="fa fa-bars fa-fw" id="sidebar-toggle"></i>
-    </span>
-    <img id="logo" :src="require(`@/assets/logo-${logoExtension}.png`)" />
     <ul class="nav-list">
       <router-link to="/">
         <li>
@@ -175,12 +171,11 @@ li:hover {
   z-index: 999;
   position: fixed;
   left: 0;
-  top: 0;
-  padding-left: 0px;
-  height: 100%;
-  width: 200px;
-  transition: all 500ms ease-out;
+  height: calc(100% - 75px);
+  width: 205px;
+  transition: transform 500ms ease-out;
   transform: translateX(-100%);
+  overflow-y: scroll;
 }
 
 .sidebar ul li {
@@ -195,6 +190,19 @@ li:hover {
 
 .sidebar.active {
   transform: translateX(0);
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: #bbbbbb;
+  border-radius: 10px;
 }
 
 @media screen and (max-width: 750px) {
@@ -217,7 +225,7 @@ li:hover {
 
 #logo {
   float: right;
-  padding-right: 15pt;
+  padding-right: 15px;
   max-height: 75px;
 }
 
