@@ -43,45 +43,59 @@
       </router-link>
     </ul>
   </div>
-  <div class="sidebar nav-bg" :class="{ active: isActive }">
-    <ul class="nav-list">
+  <div class="sidebar nav-bg" :class="{ active: isActive }" id="sidebar">
+    <div id="header">
+      <span @click="toggleSidebar">
+        <i class="fa fa-bars fa-fw" id="sidebar-toggle"></i>
+      </span>
       <router-link to="/">
-        <li>
-          <i class="fa fa-home fa-fw"></i>
-          <span class="link-name">HOME</span>
-        </li>
+        <img
+          id="logo"
+          :src="require(`@/assets/logo-${logoExtension}.png`)"
+          @click="closeSidebar"
+        />
       </router-link>
-      <router-link to="/search">
-        <li>
-          <i class="fa fa-search fa-fw"></i>
-          <span class="link-name">SEARCH</span>
-        </li>
-      </router-link>
-      <router-link to="/reorder">
-        <li>
-          <i class="fa fa-sort fa-fw"></i>
-          <span class="link-name">REORDER</span>
-        </li>
-      </router-link>
-      <router-link to="/scroll">
-        <li>
-          <i class="fa fa-arrows-v fa-fw"></i>
-          <span class="link-name">SCROLL</span>
-        </li>
-      </router-link>
-      <router-link to="/paged">
-        <li>
-          <i class="fa fa-arrows-h fa-fw"></i>
-          <span class="link-name">PAGED</span>
-        </li>
-      </router-link>
-      <router-link to="/add">
-        <li>
-          <i class="fa fa-plus-circle fa-fw"></i>
-          <span class="link-name">ADD</span>
-        </li>
-      </router-link>
-    </ul>
+    </div>
+    <div class="sidebar-nav">
+      <ul class="nav-list">
+        <router-link to="/">
+          <li>
+            <i class="fa fa-home fa-fw"></i>
+            <span class="link-name">HOME</span>
+          </li>
+        </router-link>
+        <router-link to="/search">
+          <li>
+            <i class="fa fa-search fa-fw"></i>
+            <span class="link-name">SEARCH</span>
+          </li>
+        </router-link>
+        <router-link to="/reorder">
+          <li>
+            <i class="fa fa-sort fa-fw"></i>
+            <span class="link-name">REORDER</span>
+          </li>
+        </router-link>
+        <router-link to="/scroll">
+          <li>
+            <i class="fa fa-arrows-v fa-fw"></i>
+            <span class="link-name">SCROLL</span>
+          </li>
+        </router-link>
+        <router-link to="/paged">
+          <li>
+            <i class="fa fa-arrows-h fa-fw"></i>
+            <span class="link-name">PAGED</span>
+          </li>
+        </router-link>
+        <router-link to="/add">
+          <li>
+            <i class="fa fa-plus-circle fa-fw"></i>
+            <span class="link-name">ADD</span>
+          </li>
+        </router-link>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -101,6 +115,9 @@ export default {
   methods: {
     toggleSidebar() {
       this.isActive = !this.isActive;
+    },
+    closeSidebar() {
+      this.isActive = false;
     },
   },
 };
@@ -171,14 +188,23 @@ li:hover {
   z-index: 999;
   position: fixed;
   left: 0;
-  height: calc(100% - 75px);
+  top: 0;
+  height: 100vh;
   width: 205px;
-  transition: transform 500ms ease-out;
+  transition: transform 500ms ease-out, background 500ms ease-out;
   transform: translateX(-100%);
+}
+
+.sidebar.active {
+  transform: translateX(0);
+}
+
+.sidebar-nav {
+  height: calc(100vh - 75px);
   overflow-y: scroll;
 }
 
-.sidebar ul li {
+.sidebar-nav ul li {
   display: grid;
   grid-template-columns: 1fr 3fr;
   align-items: center;
@@ -188,20 +214,22 @@ li:hover {
   font-size: 16pt;
 }
 
-.sidebar.active {
-  transform: translateX(0);
+.link-name {
+  text-align: right;
+  padding-right: 20px;
+  color: inherit;
 }
 
-.sidebar::-webkit-scrollbar {
+.sidebar-nav::-webkit-scrollbar {
   width: 5px;
 }
 
-.sidebar::-webkit-scrollbar-track {
+.sidebar-nav::-webkit-scrollbar-track {
   background: transparent !important;
 }
 
-.sidebar::-webkit-scrollbar-thumb {
-  background: #bbbbbb;
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: #818181;
   border-radius: 10px;
 }
 
@@ -215,28 +243,23 @@ li:hover {
   }
 }
 
+#header {
+  height: 75px;
+  width: 100%;
+}
+
 #sidebar-toggle {
   padding-left: 10px;
-  transform: translateY(35%);
+  transform: translateY(160%);
   font-size: 16pt;
-  height: 75px;
   cursor: pointer;
 }
 
 #logo {
   float: right;
-  padding-right: 15px;
+  padding-right: 25px;
   max-height: 75px;
-}
-
-.sidebar.active #sidebar-toggle {
-  left: 80%;
-}
-
-.link-name {
-  text-align: right;
-  padding-right: 20px;
-  color: inherit;
+  cursor: pointer;
 }
 
 /* tooltip */

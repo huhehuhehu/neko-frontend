@@ -13,7 +13,7 @@
         <i class="fa fa-sun-o fa-fw" id="sun"></i>
         <i class="fa fa-moon-o fa-fw" id="moon"></i>
       </div>
-      <div class="container-avatar" @click="randomPost()">
+      <div class="container-avatar" @click="randomPost">
         <img id="avatar" src="@/assets/yawn.png" />
         <span class="tooltip">RANDOM MASTAHPIS</span>
       </div>
@@ -23,7 +23,7 @@
 
 <script>
 export default {
-  emits: ["toggleSidebar", "toggleDarkMode"],
+  emits: ["toggleSidebar", "toggleDarkMode", "closeSidebar"],
   props: ["darkMode"],
   computed: {
     logoExtension() {
@@ -39,6 +39,7 @@ export default {
     },
     randomPost() {
       const id = Math.ceil(Math.random() * this.$store.getters["posts/total"]);
+      this.$emit("closeSidebar");
       this.$router.push(`/post/${id}`);
     },
   },
@@ -68,7 +69,7 @@ header {
   float: left;
   font-size: 16pt;
   padding-left: 10px;
-  transform: translateY(125%);
+  transform: translateY(160%);
   cursor: pointer;
 }
 

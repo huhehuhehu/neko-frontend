@@ -3,6 +3,7 @@
     :darkMode="darkMode"
     @toggle-dark-mode="toggleDarkMode"
     @toggle-sidebar="toggleSidebar"
+    @close-sidebar="closeSidebar"
   ></the-header>
   <side-bar :darkMode="darkMode" ref="sidebar"></side-bar>
   <div class="content">
@@ -37,6 +38,9 @@ export default {
   methods: {
     toggleSidebar() {
       this.$refs.sidebar.toggleSidebar();
+    },
+    closeSidebar() {
+      this.$refs.sidebar.closeSidebar();
     },
     toggleDarkMode() {
       this.darkMode = !this.darkMode;
