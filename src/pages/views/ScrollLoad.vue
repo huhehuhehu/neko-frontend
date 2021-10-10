@@ -8,13 +8,18 @@
     <div id="loaded-message" v-show="fullyLoaded">
       No more neko below
     </div>
+    <div
+      class="top-btn nav-bg"
+      :class="{ active: showBtn }"
+      @click="scrollToTop"
+    >
+      <i class="fa fa-arrow-circle-up fa-fw" />
+    </div>
   </div>
 </template>
 
 <script>
 import BaseCard from "@/components/cards/BaseCard.vue";
-
-// import { POST_PER_LOAD } from "@/config.js";
 
 export default {
   components: {
@@ -26,6 +31,7 @@ export default {
       page: 1,
       loading: false,
       fullyLoaded: false,
+      showBtn: false,
     };
   },
   computed: {
@@ -34,38 +40,39 @@ export default {
     },
   },
   methods: {
-    getNextPosts() {
+    handleScroll() {
       let bottomOfWindow =
         document.documentElement.scrollTop + window.innerHeight ===
         document.documentElement.offsetHeight;
+      if (document.documentElement.scrollTop > 3000) {
+        this.showBtn = true;
+      } else {
+        this.showBtn = false;
+      }
       if (bottomOfWindow) {
         this.loading = true;
         const data = this.$store.getters["posts/getPerPage"](this.page);
         if (!data.length) {
           this.fullyLoaded = true;
-          window.removeEventListener("scroll", this.getNextPosts);
+          window.removeEventListener("scroll", this.handleScroll);
           this.loading = false;
           return;
         }
         this.posts.push(...data);
         this.page++;
         this.loading = false;
-        // sessionStorage.setItem("posts", JSON.stringify(this.posts));
-        // sessionStorage.setItem("page", this.page);
       }
     },
+    scrollToTop() {
+      document.documentElement.scrollTop = 0;
+    },
   },
-  // created() {
-  //   if (sessionStorage.getItem("page")) {
-  //     this.posts = JSON.parse(sessionStorage.getItem("posts"));
-  //     this.page = sessionStorage.getItem("page");
-  //   }
-  // },
+
   mounted() {
-    window.addEventListener("scroll", this.getNextPosts);
+    window.addEventListener("scroll", this.handleScroll);
   },
   unmounted() {
-    window.removeEventListener("scroll", this.getNextPosts);
+    window.removeEventListener("scroll", this.handleScroll);
   },
 };
 </script>
@@ -98,5 +105,26 @@ export default {
   font-family: "Papyrus", fantasy;
   font-size: 24pt;
   padding-top: 10px;
+}
+
+.top-btn {
+  position: fixed;
+  cursor: pointer;
+  right: 5vw;
+  bottom: 5vh;
+  font-size: 3vw;
+  width: 3vw;
+  height: 3vw;
+  border-radius: 3vw;
+  transform: translateY(300%);
+  transition: transform 0.5s linear;
+}
+
+.top-btn.active {
+  transform: translateY(0);
+}
+
+.fa {
+  transform: translate(-11.5%, -19%);
 }
 </style>
