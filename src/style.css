@@ -1,5 +1,6 @@
 html {
   scroll-behavior: smooth;
+  overflow: overlay;
 }
 
 body {
@@ -42,4 +43,17 @@ body.dark-theme {
 
 .f-black {
   color: black;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #818181;
+  border-radius: 10px;
 }

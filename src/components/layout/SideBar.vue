@@ -115,9 +115,13 @@ export default {
   methods: {
     toggleSidebar() {
       this.isActive = !this.isActive;
+      document.documentElement.style.overflow = this.isActive
+        ? "hidden"
+        : "overlay";
     },
     closeSidebar() {
       this.isActive = false;
+      document.documentElement.style.overflow = "overlay";
     },
   },
 };

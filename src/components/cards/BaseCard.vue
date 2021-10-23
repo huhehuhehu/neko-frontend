@@ -1,6 +1,6 @@
 <template>
   <router-link :to="'/post/' + post.id">
-    <div class="card">
+    <div :id="post.id" class="card">
       <div class="img-container">
         <img :src="post.path" />
         <div class="bg-container" />

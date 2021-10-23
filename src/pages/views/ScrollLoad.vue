@@ -124,7 +124,29 @@ export default {
   transform: translateY(0);
 }
 
+.top-btn.active:hover {
+  animation: dance 0.5s linear;
+}
+
 .fa {
   transform: translate(-11.5%, -19%);
+}
+
+@keyframes dance {
+  0% {
+    transform: scale(1);
+  }
+  40% {
+    transform: rotate(-180deg);
+  }
+  80% {
+    transform: rotate(0);
+  }
+  95% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 </style>
