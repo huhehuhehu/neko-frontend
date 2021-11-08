@@ -1,6 +1,6 @@
 # neko-frontend
 
-![alt text](https://github.com/huhehuhehu/neko-frontend/blob/screenshots/homepage.png?raw=true)
+<p align="center"><img width="140"src="https://github.com/huhehuhehu/neko-frontend/blob/screenshots/homepage.png?raw=true"></p>
 
 ## Project setup
 
