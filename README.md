@@ -1,6 +1,6 @@
 # neko-frontend
 
-<p align="center"><img width="140"src="https://github.com/huhehuhehu/neko-frontend/blob/screenshots/homepage.png?raw=true"></p>
+<p align="center"><img width="1920"src="https://github.com/huhehuhehu/neko-frontend/blob/master/screenshots/homepage.png?raw=true"></p>
 
 ## Project setup
 
