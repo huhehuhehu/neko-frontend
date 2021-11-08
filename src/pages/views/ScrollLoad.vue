@@ -118,6 +118,7 @@ export default {
   border-radius: 3vw;
   transform: translateY(300%);
   transition: transform 0.5s linear;
+  z-index: 999;
 }
 
 .top-btn.active {
