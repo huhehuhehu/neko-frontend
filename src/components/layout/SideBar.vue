@@ -273,11 +273,11 @@ li:hover {
   color: black;
   position: absolute;
   text-align: center;
-  padding-top: 10px;
+  padding-top: 15px;
   left: 60px;
   border-radius: 10px;
   height: 35px;
-  width: 200px;
+  width: 150px;
   background: #fff;
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
   visibility: hidden;
